@@ -27,7 +27,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
         <Box>
           
            
-        <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"100%",marginLeft:"60px"}}>
+        <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"100%",marginLeft:"0px"}}>
         <Table size="small" >
              <TableHead>
             <TableRow sx={{ border: 0,backgroundColor:"#D3D3D3",fontWeight:"bold",fontSize:"small" } }>

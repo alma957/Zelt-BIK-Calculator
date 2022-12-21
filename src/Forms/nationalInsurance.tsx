@@ -210,12 +210,12 @@ for (let i = 0; i < params_arr.length; i++) {
       </FormControl>
       <FormControl style={{marginTop: "15px","width":"100%",marginLeft:dir=="column"?"0px":"10px"}}>
         <InputLabel style={{color: "black", fontWeight: "bold",marginLeft:"0px"}}>
-          Benefit Type
+          Type
         </InputLabel>
         <Select
         size="small"
           inputProps={{}}
-          input={<OutlinedInput label="Select NICs Category" style={{marginLeft:"10px"}} />}
+          input={<OutlinedInput label="Type" style={{marginLeft:"10px"}} />}
           value={inputState.benefitType}
           style={{background: "white","width":"100%"}}
           onChange={e => {
