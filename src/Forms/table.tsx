@@ -12,11 +12,17 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
    // Employer NI contribution: £{currencyFormat(calculateNI(inputState.pay * multiplier[inputState.payPeriod as keyof mult],inputState.category,employerData))}
     const months = ["Apr-22","May-22","Jun-22","Jul-22","Aug-22","Sep-22","Oct-22","Nov-22","Dec-22","Jan-23","Feb-23","Mar-23","Total"]
     if (bikType==="non-payrolled") {
-      const nicD = months.map(el=>calculateNI(pay,category,employeeRates,false,el))[12]
-      const nicC = (pay+bikValue)*0.1453
+
+      let nicD = 0
+      let nicC = 0
+      for (let i=0;i<months.length-1;i++) {
+        nicD+=calculateNI(pay,category,employeeRates,false,months[i])
+        nicC+=calculateNI(pay,category,employerData,false,months[i])
+        nicC+=calculateNI(bikValue,category,employerData,true,months[i])
+      }
       const paye = calculatePayeTaxes(pay,jurisdiction)
       const bikTax = calculateBikTaxes(pay,bikValue,jurisdiction)
-          const dir = window.innerWidth <=660 ? "column":"row"
+      const dir = window.innerWidth <=660 ? "column":"row"
       return (
         <Box>
           
@@ -44,8 +50,8 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
            
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(paye)}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(bikTax)}</TableCell>
-              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
               
              
             </TableRow>
