@@ -15,10 +15,11 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
 
       let nicD = 0
       let nicC = 0
+      let nicCAdj = 0;
       for (let i=0;i<months.length-1;i++) {
         nicD+=calculateNI(pay,category,employeeRates,false,months[i])
         nicC+=calculateNI(pay,category,employerData,false,months[i])
-        nicC+=calculateNI(bikValue,category,employerData,true,months[i])
+        nicCAdj+=calculateNI(bikValue,category,employerData,true,months[i])
       }
       const paye = calculatePayeTaxes(pay,jurisdiction)
       const bikTax = calculateBikTaxes(pay,bikValue,jurisdiction)
@@ -36,6 +37,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
             <TableCell style={{fontWeight:"bold"}} align="left">{"Employee P11D Liability"}</TableCell> 
             <TableCell style={{fontWeight:"bold"}} align="left">{director? "Director's NIC":"Employee NI"}</TableCell> 
             <TableCell style={{fontWeight:"bold"}} align="left">{"Employer NI"}</TableCell> 
+            <TableCell style={{fontWeight:"bold"}} align="left">{"Employer NI Adjustment"}</TableCell> 
             
             </TableRow>
              </TableHead>
@@ -48,10 +50,11 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
       
              
            
-              <TableCell style={{width:'25%'}} align="left">{currencyFormat(paye)}</TableCell>
-              <TableCell style={{width:'25%'}} align="left">{currencyFormat(bikTax)}</TableCell>
-              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
-              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
+              <TableCell style={{width:'20%'}} align="left">{currencyFormat(paye)}</TableCell>
+              <TableCell style={{width:'20%'}} align="left">{currencyFormat(bikTax)}</TableCell>
+              <TableCell style={{width:'20%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
+              <TableCell style={{width:'20%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
+              <TableCell style={{width:'20%'}} align="left">{currencyFormat(nicCAdj) as string}</TableCell>
               
              
             </TableRow>
