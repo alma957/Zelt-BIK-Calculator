@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Zelt-BIK-Calculator/static/css/main.5e1062de.css",
-    "main.js": "/Zelt-BIK-Calculator/static/js/main.a6f282a9.js",
+    "main.js": "/Zelt-BIK-Calculator/static/js/main.6aa68f6a.js",
     "static/js/787.b8ac6d80.chunk.js": "/Zelt-BIK-Calculator/static/js/787.b8ac6d80.chunk.js",
     "index.html": "/Zelt-BIK-Calculator/index.html",
     "main.5e1062de.css.map": "/Zelt-BIK-Calculator/static/css/main.5e1062de.css.map",
-    "main.a6f282a9.js.map": "/Zelt-BIK-Calculator/static/js/main.a6f282a9.js.map",
+    "main.6aa68f6a.js.map": "/Zelt-BIK-Calculator/static/js/main.6aa68f6a.js.map",
     "787.b8ac6d80.chunk.js.map": "/Zelt-BIK-Calculator/static/js/787.b8ac6d80.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5e1062de.css",
-    "static/js/main.a6f282a9.js"
+    "static/js/main.6aa68f6a.js"
   ]
 }
