@@ -224,7 +224,7 @@ for (let i = 0; i < params_arr.length; i++) {
           }}
         >
           <MenuItem value="payrolled">Payrolled</MenuItem>
-          <MenuItem value="non-payrolled">Non-Payrolled</MenuItem>
+          <MenuItem value="non-payrolled">P11D</MenuItem>
 
         </Select>
       </FormControl>
