@@ -28,7 +28,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
         <Box>
           
            
-        <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"100%",marginLeft:"0px"}}>
+        {/* <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"100%",marginLeft:"0px"}}>
         <Table size="small" >
              <TableHead>
             <TableRow sx={{ border: 0,backgroundColor:"#D3D3D3",fontWeight:"bold",fontSize:"small" } }>
@@ -63,6 +63,69 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
              </TableBody>
              </Table>
              
+        </TableContainer> */}
+        <TableContainer  component={Paper} style={{width:"120%",marginLeft:"25px"}}>
+        <Table size="small" >
+             <TableHead>
+            <TableRow sx={{ border: 0,backgroundColor:"#D3D3D3",fontWeight:"bold",fontSize:"small" } }>
+           
+            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{}</TableCell> 
+            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{"PAYE"}</TableCell> 
+            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{director? "Director's NIC":"Employee NI"}</TableCell> 
+            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{"Employer NI"}</TableCell> 
+           
+            </TableRow>
+             </TableHead>
+             <TableBody>
+             
+            <TableRow key={Math.random()*Math.random()*Math.random()}
+            style={{width:'100%'}}
+           
+            >
+      
+             
+           
+              <TableCell style={{width:'25%'}} align="left">{"Gross pay"}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(paye)}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
+              
+             
+            </TableRow>
+            <TableRow key={Math.random()*Math.random()*Math.random()}
+            style={{width:'100%'}}
+           
+            >
+      
+             
+           
+             
+              <TableCell style={{width:'25%'}} align="left">{"BIK adjustment"}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(bikTax)}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(0) as string}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicCAdj) as string}</TableCell>
+             
+            </TableRow>
+            <TableRow key={Math.random()*Math.random()*Math.random()}
+            style={{width:'100%'}}
+           
+            >
+      
+             
+           
+             
+              <TableCell style={{width:'25%'}} align="left">{"Total"}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(bikTax+paye)}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicCAdj+nicC) as string}</TableCell>
+            </TableRow>
+
+            
+          
+          
+             </TableBody>
+             </Table>
+             
         </TableContainer>
         </Box>
       )
@@ -70,7 +133,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
 if(!director) {
     for (let i=0;i<months.length-1;i++) {    
       
-            rows.push({"BIK":calculateBikTaxes(pay,bikValue,jurisdiction)/12,"paye":calculatePayeTaxes(pay,jurisdiction)/12,"employee":calculateNI(pay,category,employeeRates,false,months[i]), "employer":calculateNI(pay,category,employerData,false,months[i])+calculateNI(bikValue,category,employerData,true,months[i])})
+            rows.push({"BIK":calculateBikTaxes(pay,bikValue,jurisdiction)/12,"paye":calculatePayeTaxes(pay,jurisdiction)/12,"employee":calculateNI(pay,category,employeeRates,false,months[i]), "employer":calculateNI(pay,category,employerData,false,months[i]),"adj":calculateNI(bikValue,category,employerData,true,months[i])})
     }
   } else {
     if (calculationType==="standard") {
@@ -106,12 +169,12 @@ if(!director) {
     }
 
   }
-    rows.push({"paye":rows.reduce((a,b)=>a+b["paye"],0),"BIK":rows.reduce((a,b)=>a+b["BIK"],0),"employee":rows.reduce((a,b)=>a+b["employee"],0),"employer":rows.reduce((a,b)=>a+b["employer"],0)})
+    rows.push({"paye":rows.reduce((a,b)=>a+b["paye"],0),"BIK":rows.reduce((a,b)=>a+b["BIK"],0),"employee":rows.reduce((a,b)=>a+b["employee"],0),"employer":rows.reduce((a,b)=>a+b["employer"],0),"adj":rows.reduce((a,b)=>a+b["adj"],0)})
     const dir = window.innerWidth <=660 ? "column":"row"
     return (
         
        
-        <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"80%",marginLeft:"60px"}}>
+        <TableContainer  component={Paper} style={dir=="column"?{width:"100%",marginLeft:"0px"}:{width:"100%",marginLeft:"0px"}}>
         <Table size="small" >
              <TableHead>
             <TableRow >
@@ -120,22 +183,23 @@ if(!director) {
             <TableCell style={{fontWeight:"bold",fontSize:"x-small"}} align="left">{"Tax on BIK"}</TableCell> 
             <TableCell style={{fontWeight:"bold",fontSize:"x-small"}} align="left">{director? "Director's NIC":"Employee NI"}</TableCell> 
             <TableCell style={{fontWeight:"bold",fontSize:"x-small"}} align="left">{"Employer NI"}</TableCell> 
+            <TableCell style={{fontWeight:"bold",fontSize:"x-small"}} align="left">{"Employer NI Adjustment"}</TableCell> 
             
             </TableRow>
              </TableHead>
              <TableBody>
              {rows.map((row,ind) => (
             <TableRow key={Math.random()*Math.random()*Math.random()}
-            style={{width:'70%'}}
+            style={{width:'100%'}}
               sx={{ '&:last-child td, &:last-child th': { border: 0,backgroundColor:"#D3D3D3",fontWeight:"bold",fontSize:"small" } }}
             >
       
-              <TableCell style={{width:'20%', fontSize:ind===12?"normal": "small"}} align="left">{months[ind]}</TableCell>
-              <TableCell style={{width:'20%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["paye"]) as string}</TableCell>
-              <TableCell style={{width:'20%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["BIK"]) as string}</TableCell>
-              <TableCell style={{width:'20%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["employee"]) as string}</TableCell>
-              <TableCell style={{width:'20%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind]["employer"])) as string}</TableCell>
-              
+              <TableCell style={{width:'14%', fontSize:ind===12?"normal": "small"}} align="left">{months[ind]}</TableCell>
+              <TableCell style={{width:'14%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["paye"]) as string}</TableCell>
+              <TableCell style={{width:'14%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["BIK"]) as string}</TableCell>
+              <TableCell style={{width:'14%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind])["employee"]) as string}</TableCell>
+              <TableCell style={{width:'14%',fontSize:ind===12?"normal": "small"}} align="left">{currencyFormat((rows[ind]["employer"])) as string}</TableCell>
+              <TableCell style={{width:'24%',fontSize:ind===12?"normal": "small",alignItems:"center"}} align="left">{currencyFormat((rows[ind]["adj"])) as string}</TableCell>
              
             </TableRow>
           ))}
