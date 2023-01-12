@@ -43,7 +43,7 @@ export const initialState: InputState = {
   proRataThreshold:1,
   firstPaidMonth:0,
   bikValue:2000,
-  benefitType:"payrolled",
+  benefitType:"non-payrolled",
   jurisdiction:"england"
 
 };
