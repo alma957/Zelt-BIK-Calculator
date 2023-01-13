@@ -120,7 +120,7 @@ for (let i = 0; i < params_arr.length; i++) {
         }}
         InputProps={{
           startAdornment: <InputAdornment position="start">£</InputAdornment>,
-          inputProps: {min: 0,step:"0.01"},
+          inputProps: {min: 0,step:"1"},
         
           
           
@@ -144,7 +144,7 @@ for (let i = 0; i < params_arr.length; i++) {
         }}
         InputProps={{
           startAdornment: <InputAdornment position="start">£</InputAdornment>,
-          inputProps: {min: 0,step:"0.01"},
+          inputProps: {min: 0,step:"1"},
         
           
           
@@ -326,9 +326,10 @@ for (let i = 0; i < params_arr.length; i++) {
 };
 export const currencyFormat = (num: number): string => {
   if (num<0) {
-    return "-£"+(-num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")).toString()
+    return "-£"+(Math.floor(-num)).toString()
+    //return "-£"+(-num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")).toString()
   } 
-  return "£"+num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  return "£"+Math.ceil(num);
 };
 
 export const roundUpAll = (original: number): number => {

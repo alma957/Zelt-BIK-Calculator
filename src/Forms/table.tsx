@@ -85,7 +85,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
       
              
            
-              <TableCell style={{width:'25%'}} align="left">{"Gross pay"}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{"Regular taxes"}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(paye)}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicC) as string}</TableCell>
@@ -114,7 +114,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
              
            
              
-              <TableCell style={{width:'25%'}} align="left">{"Total"}</TableCell>
+              <TableCell style={{width:'25%'}} align="left">{"Total taxes"}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(bikTax+paye)}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicD) as string}</TableCell>
               <TableCell style={{width:'25%'}} align="left">{currencyFormat(nicCAdj+nicC) as string}</TableCell>
