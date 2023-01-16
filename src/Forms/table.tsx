@@ -69,7 +69,7 @@ export const OutputTable = ({bikValue,bikType,jurisdiction,director,pay,category
              <TableHead>
             <TableRow sx={{ border: 0,backgroundColor:"#D3D3D3",fontWeight:"bold",fontSize:"small" } }>
            
-            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{}</TableCell> 
+            <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{"Annual Taxes"}</TableCell> 
             <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{"PAYE"}</TableCell> 
             <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{director? "Director's NIC":"Employee NI"}</TableCell> 
             <TableCell style={{fontWeight:"bold",width:'25%'}} align="left">{"Employer NI"}</TableCell> 

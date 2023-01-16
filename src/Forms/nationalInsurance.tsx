@@ -326,10 +326,10 @@ for (let i = 0; i < params_arr.length; i++) {
 };
 export const currencyFormat = (num: number): string => {
   if (num<0) {
-    return "-£"+(Math.floor(-num)).toString()
+    return "-£"+(Math.floor(-num)).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
     //return "-£"+(-num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")).toString()
   } 
-  return "£"+Math.ceil(num);
+  return "£"+Math.ceil(num).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
 export const roundUpAll = (original: number): number => {
